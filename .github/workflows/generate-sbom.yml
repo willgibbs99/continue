@@ -21,8 +21,11 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install CycloneDX BOM tool
+        run: npm install @cyclonedx/bom
+
       - name: Generate SBOM
-        run: npx @cyclonedx/bom -o sbom.xml
+        run: npx cyclonedx-bom -o sbom.xml
 
       - name: Upload SBOM as artifact
         uses: actions/upload-artifact@v4
