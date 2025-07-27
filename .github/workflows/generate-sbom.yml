@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   generate-sbom:
@@ -20,11 +21,8 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install CycloneDX SBOM tool
-        run: npm install -g @cyclonedx/bom
-
       - name: Generate SBOM
-        run: cyclonedx-bom -o sbom.xml
+        run: npx @cyclonedx/bom -o sbom.xml
 
       - name: Upload SBOM as artifact
         uses: actions/upload-artifact@v4
